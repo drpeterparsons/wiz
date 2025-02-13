@@ -1,0 +1,1870 @@
+---
+Metadata:
+  AWSToolsMetrics:
+    IaC_Generator: "arn:aws:cloudformation:eu-west-1:977098990633:generatedTemplate/89e25672-2d18-4c87-9615-7d3385400240"
+Resources:
+  LogsLogStream00authenticator9b9b503c29cd0863121ceb618e78d35400cjNFB:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "authenticator-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  EC2DHCPOptions00dopt0277e6ef5195dd87900Ym9dM:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::DHCPOptions"
+    DeletionPolicy: "Retain"
+    Properties:
+      DomainName: "eu-west-1.compute.internal"
+      DomainNameServers:
+      - "AmazonProvidedDNS"
+      Tags: []
+  EC2NetworkInterfaceAttachment00eniattach044502c4f02a42f3600LKxPA:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterfaceAttachment"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkInterfaceId: "eni-081b640b22d5ed7c8"
+      InstanceId: "i-05095d882ec0bc072"
+      DeviceIndex: "0"
+      DeleteOnTermination: true
+  EC2Instance00i05095d882ec0bc07200j8JZy:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Instance"
+    DeletionPolicy: "Retain"
+    Properties:
+      Tenancy: "default"
+      SecurityGroups:
+      - "launch-wizard-8"
+      PrivateIpAddress: "172.31.45.21"
+      InstanceInitiatedShutdownBehavior: "stop"
+      CpuOptions:
+        ThreadsPerCore: 1
+        CoreCount: 1
+      BlockDeviceMappings:
+      - Ebs:
+          SnapshotId: "snap-042a71c5e35f1efff"
+          VolumeType: "gp2"
+          Iops: 100
+          VolumeSize: 8
+          Encrypted: false
+          DeleteOnTermination: true
+        DeviceName: "/dev/sda1"
+      AvailabilityZone: "eu-west-1a"
+      PrivateDnsNameOptions:
+        EnableResourceNameDnsARecord: true
+        HostnameType: "ip-name"
+        EnableResourceNameDnsAAAARecord: false
+      SubnetId:
+        Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+      SecurityGroupIds:
+      - "sg-05e721c034051f842"
+      EbsOptimized: false
+      DisableApiTermination: false
+      KeyName: "pparsons-eu-west1"
+      SourceDestCheck: true
+      Volumes:
+      - VolumeId: "vol-07f0432258e02c9c9"
+        Device: "/dev/sda1"
+      PlacementGroupName: ""
+      VpcId: "vpc-026b5a41adcabd1de"
+      State:
+        Code: "16"
+        Name: "running"
+      NetworkInterfaces:
+      - PrivateIpAddresses:
+        - PrivateIpAddress: "172.31.45.21"
+          Primary: true
+        SecondaryPrivateIpAddressCount: 0
+        DeviceIndex: "0"
+        GroupSet:
+        - Ref: "EC2SecurityGroup00sg05e721c034051f842007B7Vh"
+        Ipv6Addresses: []
+        SubnetId:
+          Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+        AssociatePublicIpAddress: true
+        NetworkInterfaceId:
+          Ref: "EC2NetworkInterface00eni081b640b22d5ed7c800GHs3i"
+        DeleteOnTermination: true
+      ImageId: "ami-04ea646f7dde45059"
+      InstanceType: "t2.micro"
+      Monitoring: false
+      Tags:
+      - Value: "MongoDBVM"
+        Key: "Name"
+      CreditSpecification:
+        CPUCredits: "standard"
+  MemoryDBParameterGroup00defaultmemorydbvalkey700H5IQN:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-valkey7"
+      Family: "memorydb_valkey7"
+      Description: "Default parameter group for memorydb_valkey7"
+  IAMUser00pparsons00g4yB4:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::User"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/IAMFullAccess"
+      - "arn:aws:iam::aws:policy/AutoScalingFullAccess"
+      - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+      - "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+      - "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
+      - "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+      UserName: "pparsons"
+      LoginProfile:
+        PasswordResetRequired: false
+      Tags:
+      - Value: "Access Key 2"
+        Key: "AKIA6G75DMQU3NIOZSRE"
+      - Value: "ppwizkey"
+        Key: "AKIA6G75DMQUXDAQJQ4N"
+  EC2Route00rtb02df1e2d9cf1a6bf200olBa6:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Route"
+    DeletionPolicy: "Retain"
+    Properties:
+      RouteTableId:
+        Ref: "EC2RouteTable00rtb02df1e2d9cf1a6bf200f6QPi"
+      DestinationCidrBlock:
+        Fn::GetAtt:
+        - "EC2VPC00vpc026b5a41adcabd1de005aRba"
+        - "CidrBlock"
+      GatewayId: "local"
+      VpcEndpointId: "local"
+  IAMRole00AWSServiceRoleForSupport00la8Ri:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/aws-service-role/support.amazonaws.com/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/aws-service-role/AWSSupportServiceRolePolicy"
+      MaxSessionDuration: 3600
+      RoleName: "AWSServiceRoleForSupport"
+      Description: "Enables resource access for AWS to provide billing, administrative\
+        \ and support services"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "support.amazonaws.com"
+  EC2NetworkInterface00eni0bd8118817de2e8a4004KFEX:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterface"
+    DeletionPolicy: "Retain"
+    Properties:
+      Description: "Amazon EKS pjp-wiz-k8s-cluster"
+      PrivateIpAddress: "172.31.46.147"
+      PrivateIpAddresses:
+      - PrivateIpAddress: "172.31.46.147"
+        Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+      - "sg-0480aa42a1ab3a4ae"
+      Ipv6Prefixes: []
+      SubnetId:
+        Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+      SourceDestCheck: true
+      InterfaceType: "interface"
+      Tags: []
+  IAMRole00AWSServiceRoleForAmazonEKS004sHoT:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/aws-service-role/eks.amazonaws.com/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/aws-service-role/AmazonEKSServiceRolePolicy"
+      MaxSessionDuration: 3600
+      RoleName: "AWSServiceRoleForAmazonEKS"
+      Description: "Allows Amazon EKS to call AWS services on your behalf."
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "eks.amazonaws.com"
+  EC2SecurityGroup00sg0d59c2776e908b67600664k7:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-6 created 2025-02-07T14:15:39.899Z"
+      GroupName: "launch-wizard-6"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  EC2SecurityGroup00sg006ffa80439e345b100x1JvO:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-1 created 2025-01-29T14:03:07.112Z"
+      GroupName: "launch-wizard-1"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  LogsLogStream00kubeschedulereab5f25d9562000d7e32b208b01737c900Gv8eY:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-scheduler-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  MemoryDBParameterGroup00defaultmemorydbredis7searchpreview00HL6xT:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-redis7.search.preview"
+      Family: "memorydb_redis7.search.preview"
+      Description: "Default parameter group for memorydb_redis7.search.preview"
+  Route53ResolverResolverRuleAssociation00rslvrautodefinedassocvpc026b5a41adcabd1deinternetresolver009ej6E:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Route53Resolver::ResolverRuleAssociation"
+    DeletionPolicy: "Retain"
+    Properties:
+      VPCId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      ResolverRuleId: "rslvr-autodefined-rr-internet-resolver"
+      Name: "System Rule Association"
+  CloudFrontOriginRequestPolicy00acba4595bd2849b8b9fe13317c0390fa00AnyMR:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "none"
+        Comment: "Policy to forward user-agent and referer headers to origin"
+        HeadersConfig:
+          HeaderBehavior: "whitelist"
+          Headers:
+          - "referer"
+          - "user-agent"
+        CookiesConfig:
+          CookieBehavior: "none"
+        Name: "Managed-UserAgentRefererHeaders"
+  LogsLogStream00kubeschedulerb509754f03f0962f31092dae942500b600IpTHp:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-scheduler-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  CloudFrontOriginRequestPolicy00216adef65c7f47e4b9895492eafa07d3003Ik6M:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "all"
+        Comment: "Policy to forward all parameters in viewer requests"
+        HeadersConfig:
+          HeaderBehavior: "allViewer"
+        CookiesConfig:
+          CookieBehavior: "all"
+        Name: "Managed-AllViewer"
+  CloudFrontOriginRequestPolicy00b689b0a853d040abbaf268738e2966ac00Tphtv:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "all"
+        Comment: "Policy to forward all parameters in viewer requests except for the\
+          \ Host header"
+        HeadersConfig:
+          HeaderBehavior: "allExcept"
+          Headers:
+          - "host"
+        CookiesConfig:
+          CookieBehavior: "all"
+        Name: "Managed-AllViewerExceptHostHeader"
+  MemoryDBParameterGroup00defaultmemorydbvalkey7search00r5o2F:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-valkey7.search"
+      Family: "memorydb_valkey7"
+      Description: "Customized default parameter group for memorydb_valkey7 with search-enabled\
+        \ yes"
+  KMSKey00b402a490481747919b7f1af688e7bc6400Ez9y9:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::KMS::Key"
+    DeletionPolicy: "Retain"
+    Properties:
+      Origin: "AWS_KMS"
+      MultiRegion: false
+      Description: "Default key that protects my S3 objects when no other key is defined"
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+        - Condition:
+            StringEquals:
+              kms:ViaService: "s3.eu-west-1.amazonaws.com"
+              kms:CallerAccount: "977098990633"
+          Resource: "*"
+          Action:
+          - "kms:Encrypt"
+          - "kms:Decrypt"
+          - "kms:ReEncrypt*"
+          - "kms:GenerateDataKey*"
+          - "kms:DescribeKey"
+          Effect: "Allow"
+          Principal:
+            AWS: "*"
+          Sid: "Allow access through S3 for all principals in the account that are\
+            \ authorized to use S3"
+        - Resource: "*"
+          Action:
+          - "kms:Describe*"
+          - "kms:Get*"
+          - "kms:List*"
+          Effect: "Allow"
+          Principal:
+            AWS: "arn:aws:iam::977098990633:root"
+          Sid: "Allow direct access to key metadata to the account"
+        Id: "auto-s3-2"
+      KeySpec: "SYMMETRIC_DEFAULT"
+      Enabled: true
+      EnableKeyRotation: true
+      KeyUsage: "ENCRYPT_DECRYPT"
+      Tags: []
+  EC2VPC00vpc026b5a41adcabd1de005aRba:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::VPC"
+    DeletionPolicy: "Retain"
+    Properties:
+      CidrBlock: "172.31.0.0/16"
+      EnableDnsSupport: true
+      InstanceTenancy: "default"
+      EnableDnsHostnames: true
+      Tags: []
+  LogsLogStream00kubecontrollermanager9829ee114b2dd6dfda3082c54606a42300jd1Zn:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-controller-manager-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  EC2SecurityGroup00sg0480aa42a1ab3a4ae00QYh71:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "EKS created security group applied to ENI that is attached\
+        \ to EKS Control Plane master nodes, as well as any managed workloads."
+      GroupName: "eks-cluster-sg-pjp-wiz-k8s-cluster-2055081879"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - IpProtocol: "-1"
+        FromPort: -1
+        SourceSecurityGroupId: "sg-0480aa42a1ab3a4ae"
+        ToPort: -1
+        SourceSecurityGroupOwnerId: "977098990633"
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+      Tags:
+      - Value: "owned"
+        Key: "kubernetes.io/cluster/pjp-wiz-k8s-cluster"
+      - Value: "eks-cluster-sg-pjp-wiz-k8s-cluster-2055081879"
+        Key: "Name"
+  CloudFrontCachePolicy002e54312d136d493c8eb9b001f22f67d200VDsFX:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy for Amplify Origin"
+        MinTTL: 2
+        MaxTTL: 600
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "CloudFront-Viewer-Country"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "all"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 2
+        Name: "Managed-Amplify"
+  EC2Subnet00subnet05a03bea0c9b3836100NHQjm:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Subnet"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      MapPublicIpOnLaunch: true
+      EnableDns64: false
+      AvailabilityZoneId: "euw1-az3"
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsARecord: false
+        HostnameType: "ip-name"
+        EnableResourceNameDnsAAAARecord: false
+      CidrBlock: "172.31.32.0/20"
+      Ipv6Native: false
+      Tags: []
+  CloudFrontCachePolicy007e5fad67ee984ad0b05a394999eefc1a00EriTr:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Amplify cache policy for static content"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-StaticContent"
+  CloudFrontCachePolicy00766eb0281aff4eb2a5a42674e1538f2600BNRfB:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Amplify cache policy for image optimization"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "RSC"
+            - "Accept"
+            - "CloudFront-Viewer-Country"
+            - "X-Amplify-Dpl"
+            - "Host"
+          CookiesConfig:
+            Cookies:
+            - "__dpl"
+            CookieBehavior: "whitelist"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-ImageOptimization-V2"
+  EC2SubnetNetworkAclAssociation00aclassoc0ce5884041d1371b900KSBBF:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SubnetNetworkAclAssociation"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkAclId:
+        Ref: "EC2NetworkAcl00acl09a2711e1e4ff46dd00zsTn1"
+      SubnetId:
+        Ref: "EC2Subnet00subnet0663a57b02dacaf9b00jjAcr"
+  EC2Volume00vol0d3f448920fa5ea2400kP0CD:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Volume"
+    DeletionPolicy: "Retain"
+    Properties:
+      MultiAttachEnabled: false
+      SnapshotId: "snap-095d4dd10a3035f1e"
+      VolumeType: "gp2"
+      Encrypted: false
+      Size: 8
+      AutoEnableIO: true
+      AvailabilityZone: "eu-west-1c"
+      Iops: 100
+      Tags: []
+  LogsLogStream00cloudcontrollermanager9b9b503c29cd0863121ceb618e78d354000WJ5w:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "cloud-controller-manager-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  CloudFrontCachePolicy0017322e934707445a93bc6c8c1662182200cOhZj:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Default Amplify cache policy without cookies"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "RSC"
+            - "Accept"
+            - "CloudFront-Viewer-Country"
+            - "X-Amplify-Dpl"
+            - "Host"
+          CookiesConfig:
+            Cookies:
+            - "__dpl"
+            CookieBehavior: "whitelist"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-DefaultNoCookies-V2"
+  CloudFrontCachePolicy004c02794c7c814ba18b5de05fb0f95ed8009IidQ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Amplify cache policy for static content"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStrings:
+            - "dpl"
+            QueryStringBehavior: "whitelist"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "RSC"
+            - "CloudFront-Viewer-Country"
+            - "X-Amplify-Dpl"
+            - "Host"
+          CookiesConfig:
+            Cookies:
+            - "__dpl"
+            CookieBehavior: "whitelist"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-StaticContent-V2"
+  EC2Route00rtb02df1e2d9cf1a6bf200fCEEK:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Route"
+    DeletionPolicy: "Retain"
+    Properties:
+      RouteTableId:
+        Ref: "EC2RouteTable00rtb02df1e2d9cf1a6bf200f6QPi"
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId:
+        Ref: "EC2InternetGateway00igw0feace3c2f4d07595003jBBP"
+      VpcEndpointId: "igw-0feace3c2f4d07595"
+  EC2SecurityGroup00sg06f51db81c553b61a00Z60tP:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-2 created 2025-02-06T19:34:45.025Z"
+      GroupName: "launch-wizard-2"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  IAMInstanceProfile00ekseuwest1pjpwizk8scluster400120210247837038200z7rRA:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::InstanceProfile"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      Roles:
+      - Ref: "IAMRole00OpenSeason00FaAae"
+      InstanceProfileName: "eks-eu-west-1-pjp-wiz-k8s-cluster-4001202102478370382"
+  EC2Volume00vol07f0432258e02c9c900rN9lQ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Volume"
+    DeletionPolicy: "Retain"
+    Properties:
+      MultiAttachEnabled: false
+      SnapshotId: "snap-042a71c5e35f1efff"
+      VolumeType: "gp2"
+      Encrypted: false
+      Size: 8
+      AutoEnableIO: true
+      AvailabilityZone: "eu-west-1a"
+      Iops: 100
+      Tags: []
+  S3Bucket00pjpwizbucket00eeQB2:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: false
+        IgnorePublicAcls: false
+        BlockPublicPolicy: false
+        BlockPublicAcls: false
+      BucketName: "pjpwizbucket"
+      OwnershipControls:
+        Rules:
+        - ObjectOwnership: "BucketOwnerPreferred"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - BucketKeyEnabled: true
+          ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+  LogsLogStream00kubecontrollermanager9b9b503c29cd0863121ceb618e78d354002GB8Q:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-controller-manager-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  EventsRule00ruleEKSComputeManagedRule00q59n8:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Events::Rule"
+    DeletionPolicy: "Retain"
+    Properties:
+      EventBusName:
+        Ref: "EventsEventBus00default000NdO9"
+      EventPattern:
+        detail-type:
+        - "EC2 Spot Instance Interruption Warning"
+        - "EC2 Instance State-change Notification"
+        - "EC2 Instance Rebalance Recommendation"
+        - "AWS Health Event"
+        source:
+        - "aws.ec2"
+        - "aws.health"
+      Description: "EKSComputeManagedRule"
+      State: "ENABLED"
+      Targets:
+      - Arn: "arn:aws:eks-compute:eu-west-1:::"
+        Id: "EKSComputeManagedRule"
+      Id: "EKSComputeManagedRule"
+      Name: "EKSComputeManagedRule"
+  LogsLogGroup00awsekshilariousgrungegophercluster00z0We3:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      FieldIndexPolicies: []
+      LogGroupClass: "STANDARD"
+      LogGroupName: "/aws/eks/hilarious-grunge-gopher/cluster"
+      DataProtectionPolicy: {}
+  CodeStarConnectionsConnection00connection5eb2e846f79e45848b01d0159e9a47f600dTqiU:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CodeStarConnections::Connection"
+    DeletionPolicy: "Retain"
+    Properties:
+      ConnectionName: "Wiz Demo"
+      Tags: []
+      ProviderType: "GitHub"
+  LogsLogStream00kubeapiserveraudit9b9b503c29cd0863121ceb618e78d35400nNKjU:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-audit-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  EC2NetworkAcl00acl09a2711e1e4ff46dd00zsTn1:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkAcl"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      Tags: []
+  CloudFrontCachePolicy004135ea2d6df844a39df34b5a84be39ad00JCgtN:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy with caching disabled"
+        MinTTL: 0
+        MaxTTL: 0
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: false
+          HeadersConfig:
+            HeaderBehavior: "none"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: false
+        DefaultTTL: 0
+        Name: "Managed-CachingDisabled"
+  LogsLogStream00cloudcontrollermanager9829ee114b2dd6dfda3082c54606a42300c8zbb:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "cloud-controller-manager-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  EC2KeyPair00pparsonseuwest100XmUb2:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::KeyPair"
+    DeletionPolicy: "Retain"
+    Properties:
+      KeyName: "pparsons-eu-west1"
+      KeyType: "rsa"
+      PublicKeyMaterial: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDuA0HHHv069R7J/cv6lqOGssVGPyxuQocg6sATrMXQS6gUFqxWweaw2KGzbeL+jjTH03rjQNcAFBY/NAl19GuC9QjOdd6t0yuFWQOBUw91KVXMaeZckjafZlOFT66hjHUwjPbpxepCiPs1rt9XTxf0/TAQ3gbf+5sOBYkolYPTWzBYxv/RDhiTjdediFFehlHtAzHq3j9cbi0cnsykVq9g2eNHSlu9tNqgT9QguTZAQQbJZxlwR4LW8AwQAmaGOB1x72DTmLWBv9s+6nuNZPrkf51FUZ9WEQfW+WfM5GUYWdEup4QIKrI9LbLmMmLvcYFXsgIjHdQa8RIBTOwsBLgh\
+        \ pparsons-eu-west1\n"
+      Tags: []
+  LogsLogStream00kubeapiserveraudit9829ee114b2dd6dfda3082c54606a42300I3nAB:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-audit-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  MemoryDBParameterGroup00defaultmemorydbredis7search00XGs8k:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-redis7.search"
+      Family: "memorydb_redis7"
+      Description: "Customized default parameter group for memorydb_redis7 with search-enabled\
+        \ yes"
+  LogsLogStream00kubeapiserverauditb509754f03f0962f31092dae942500b600Fyej1:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-audit-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  CloudFrontCachePolicy00658327eaf89d4faba63d7e88639e58f600ZsDqR:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy with caching enabled. Supports Gzip and Brotli compression."
+        MinTTL: 1
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "none"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 86400
+        Name: "Managed-CachingOptimized"
+  LogsLogStream00kubeapiserverauditeab5f25d9562000d7e32b208b01737c900x5gnM:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-audit-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  LogsLogStream00eca0dfd8b34d46cbbfa2b11cb6d279b500IPBIV:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "eca0dfd8-b34d-46cb-bfa2-b11cb6d279b5"
+      LogGroupName:
+        Ref: "LogsLogGroup00awscodebuildSimpleDockerProject06614a4bf36b00wFS1H"
+  EC2VolumeAttachment00vol07f0432258e02c9c900PVFB6:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::VolumeAttachment"
+    DeletionPolicy: "Retain"
+    Properties:
+      InstanceId: "i-05095d882ec0bc072"
+      VolumeId: "vol-07f0432258e02c9c9"
+      Device: "/dev/sda1"
+  LogsLogStream00kubecontrollermanagerb509754f03f0962f31092dae942500b600SoeIq:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-controller-manager-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  AthenaWorkGroup00primary000opu5:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Athena::WorkGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      WorkGroupConfiguration:
+        RequesterPaysEnabled: false
+        EnforceWorkGroupConfiguration: false
+        EngineVersion:
+          SelectedEngineVersion: "AUTO"
+        PublishCloudWatchMetricsEnabled: true
+        ResultConfiguration: {}
+      State: "ENABLED"
+      Tags: []
+      Name: "primary"
+  MemoryDBParameterGroup00defaultmemorydbredis600vire2:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-redis6"
+      Family: "memorydb_redis6"
+      Description: "Default parameter group for memorydb_redis6"
+  LogsLogStream00cloudcontrollermanagereab5f25d9562000d7e32b208b01737c9002sEcZ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "cloud-controller-manager-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  CloudFrontOriginRequestPolicy00775133bc15f249f9abeaafb2e0bf67d200CmbCZ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "all"
+        Comment: "Policy for Elemental MediaTailor Origin"
+        HeadersConfig:
+          HeaderBehavior: "whitelist"
+          Headers:
+          - "origin"
+          - "access-control-request-headers"
+          - "x-forwarded-for"
+          - "access-control-request-method"
+          - "user-agent"
+        CookiesConfig:
+          CookieBehavior: "none"
+        Name: "Managed-Elemental-MediaTailor-PersonalizedManifests"
+  ECRRepository00pparsonswiz00zBtJl:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ECR::Repository"
+    DeletionPolicy: "Retain"
+    Properties:
+      ImageScanningConfiguration:
+        ScanOnPush: false
+      RepositoryName: "pparsons/wiz"
+      EncryptionConfiguration:
+        EncryptionType: "AES256"
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement:
+        - Action:
+          - "ecr:GetAuthorizationToken"
+          - "ecr:BatchCheckLayerAvailability"
+          - "ecr:BatchDeleteImage"
+          - "ecr:BatchGetImage"
+          - "ecr:BatchGetRepositoryScanningConfiguration"
+          - "ecr:BatchImportUpstreamImage"
+          - "ecr:CompleteLayerUpload"
+          - "ecr:DeleteLifecyclePolicy"
+          - "ecr:DeleteRepository"
+          - "ecr:DeleteRepositoryPolicy"
+          - "ecr:DescribeImages"
+          - "ecr:DescribeImageReplicationStatus"
+          - "ecr:DescribeImageScanFindings"
+          - "ecr:DescribeRepositories"
+          - "ecr:GetDownloadUrlForLayer"
+          - "ecr:GetLifecyclePolicy"
+          - "ecr:GetRepositoryPolicy"
+          - "ecr:GetLifecyclePolicyPreview"
+          - "ecr:InitiateLayerUpload"
+          - "ecr:ListImages"
+          - "ecr:ListTagsForResource"
+          - "ecr:PutImage"
+          - "ecr:PutImageScanningConfiguration"
+          - "ecr:PutImageTagMutability"
+          - "ecr:PutLifecyclePolicy"
+          - "ecr:PutRegistryPolicy"
+          - "ecr:ReplicateImage"
+          - "ecr:SetRepositoryPolicy"
+          - "ecr:StartImageScan"
+          - "ecr:StartLifecyclePolicyPreview"
+          - "ecr:TagResource"
+          - "ecr:UntagResource"
+          - "ecr:UploadLayerPart"
+          Effect: "Allow"
+          Principal:
+            AWS: "arn:aws:iam::977098990633:user/pparsons"
+          Sid: "new statement"
+      Tags: []
+      ImageTagMutability: "MUTABLE"
+  CloudFrontCachePolicy00a6bad94636c34c33aa98362c74a7fb1300qEomy:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Default Amplify cache policy without cookies"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "Accept"
+            - "CloudFront-Viewer-Country"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-DefaultNoCookies"
+  CloudFrontOriginRequestPolicy0033f36d7ef39646d990e052428a34d9dc00jjOU9:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "all"
+        Comment: "Policy to forward all parameters in viewer requests and all CloudFront\
+          \ headers as of June 2022"
+        HeadersConfig:
+          HeaderBehavior: "allViewerAndWhitelistCloudFront"
+          Headers:
+          - "CloudFront-Viewer-Time-Zone"
+          - "CloudFront-Viewer-Address"
+          - "CloudFront-Viewer-Country"
+          - "CloudFront-Is-IOS-Viewer"
+          - "CloudFront-Is-Tablet-Viewer"
+          - "CloudFront-Forwarded-Proto"
+          - "CloudFront-Viewer-Country-Name"
+          - "CloudFront-Is-Mobile-Viewer"
+          - "CloudFront-Is-SmartTV-Viewer"
+          - "CloudFront-Viewer-Country-Region"
+          - "CloudFront-Is-Android-Viewer"
+          - "CloudFront-Viewer-Country-Region-Name"
+          - "CloudFront-Viewer-City"
+          - "CloudFront-Viewer-Latitude"
+          - "CloudFront-Viewer-Longitude"
+          - "CloudFront-Viewer-Http-Version"
+          - "CloudFront-Viewer-Postal-Code"
+          - "CloudFront-Viewer-ASN"
+          - "CloudFront-Is-Desktop-Viewer"
+          - "CloudFront-Viewer-Metro-Code"
+          - "CloudFront-Viewer-TLS"
+        CookiesConfig:
+          CookieBehavior: "all"
+        Name: "Managed-AllViewerAndCloudFrontHeaders-2022-06"
+  LogsLogStream00c7fe11a60fed44f691cb9bf84be4454d00AnxC8:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "c7fe11a6-0fed-44f6-91cb-9bf84be4454d"
+      LogGroupName:
+        Ref: "LogsLogGroup00awscodebuildSimpleDockerProject06614a4bf36b00wFS1H"
+  LogsLogStream00cloudcontrollermanagerb509754f03f0962f31092dae942500b600dnwJr:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "cloud-controller-manager-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  CloudFrontCachePolicy00b2884449e4de46a7ac3670bc7f1ddd6d00nqV39:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Default policy when compression is disabled"
+        MinTTL: 1
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: false
+          HeadersConfig:
+            HeaderBehavior: "none"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: false
+        DefaultTTL: 86400
+        Name: "Managed-CachingOptimizedForUncompressedObjects"
+  EC2SubnetNetworkAclAssociation00aclassoc0017df491fef43fd900HPwT7:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SubnetNetworkAclAssociation"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkAclId:
+        Ref: "EC2NetworkAcl00acl09a2711e1e4ff46dd00zsTn1"
+      SubnetId:
+        Ref: "EC2Subnet00subnet02c025bb6b0f36cda001X8BW"
+  EC2NetworkInterfaceAttachment00eniattach0dcf389eac14be5de00qdVgJ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterfaceAttachment"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkInterfaceId: "eni-05031f661a9209c22"
+      DeviceIndex: "1"
+      DeleteOnTermination: true
+  EC2SecurityGroup00sg09a4fc355778bf2b300sAyIe:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "MongoDB 5.0 Community Edition on CentOS8, supported by whaleal-v2.0-AutogenByAWSMP--1\
+        \ created 2025-01-29T15:40:11.445Z"
+      GroupName: "MongoDB 5.0 Community Edition on CentOS8, supported by whaleal-v2.0-AutogenByAWSMP--1"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 27017
+        ToPort: 27017
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  CloudFrontCachePolicy001c6db51aa33f469a8245dae26771f53000UsPfU:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Amplify cache policy for image optimization"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "Accept"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-ImageOptimization"
+  XRayGroup00groupDefault00Gtyhj:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::XRay::Group"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupName: "Default"
+      InsightsConfiguration:
+        InsightsEnabled: false
+        NotificationsEnabled: false
+      Tags: []
+  EC2VPCDHCPOptionsAssociation00vpc026b5a41adcabd1de00mf8kL:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::VPCDHCPOptionsAssociation"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      DhcpOptionsId:
+        Ref: "EC2DHCPOptions00dopt0277e6ef5195dd87900Ym9dM"
+  CloudFrontOriginRequestPolicy0088a5eaf42fd44709b370b4c650ea3fcf002KPMd:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "none"
+        Comment: "Policy for S3 origin with CORS"
+        HeadersConfig:
+          HeaderBehavior: "whitelist"
+          Headers:
+          - "origin"
+          - "access-control-request-headers"
+          - "access-control-request-method"
+        CookiesConfig:
+          CookieBehavior: "none"
+        Name: "Managed-CORS-S3Origin"
+  EC2InternetGateway00igw0feace3c2f4d07595003jBBP:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::InternetGateway"
+    DeletionPolicy: "Retain"
+    Properties:
+      Tags: []
+  EC2SecurityGroup00sg0e7b07d0a6a4aa56b00uxgoP:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-3 created 2025-02-06T20:05:46.835Z"
+      GroupName: "launch-wizard-3"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  LogsLogStream00authenticatoreab5f25d9562000d7e32b208b01737c90048AbH:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "authenticator-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  EventsEventBus00default000NdO9:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Events::EventBus"
+    DeletionPolicy: "Retain"
+    Properties:
+      Tags: []
+      Name: "default"
+  EC2SecurityGroup00sg093dea868ca73dd45006o2eb:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-4 created 2025-02-06T20:38:43.755Z"
+      GroupName: "launch-wizard-4"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  IAMRole00OpenSeason00FaAae:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/AdministratorAccess"
+      MaxSessionDuration: 3600
+      RoleName: "OpenSeason"
+      Description: "Dummy full admin access role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "ec2.amazonaws.com"
+      Tags:
+      - Value: "AllowFullAccess"
+        Key: "Purpose"
+  EC2RouteTable00rtb02df1e2d9cf1a6bf200f6QPi:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::RouteTable"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+  CloudFrontCachePolicy004cc15a8ad71548a482b8cc0b614638fe00UtulQ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy for origins that return Cache-Control headers and serve different\
+          \ content based on values present in the query string."
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "x-method-override"
+            - "origin"
+            - "host"
+            - "x-http-method"
+            - "x-http-method-override"
+          CookiesConfig:
+            CookieBehavior: "all"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "UseOriginCacheControlHeaders-QueryStrings"
+  EC2NetworkInterface00eni081b640b22d5ed7c800GHs3i:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterface"
+    DeletionPolicy: "Retain"
+    Properties:
+      Description: ""
+      PrivateIpAddress: "172.31.45.21"
+      PrivateIpAddresses:
+      - PrivateIpAddress: "172.31.45.21"
+        Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+      - "sg-05e721c034051f842"
+      Ipv6Prefixes: []
+      SubnetId:
+        Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+      SourceDestCheck: true
+      InterfaceType: "interface"
+      Tags: []
+  MemoryDBParameterGroup00defaultmemorydbredis700UIYWP:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ParameterGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      ParameterGroupName: "default.memorydb-redis7"
+      Family: "memorydb_redis7"
+      Description: "Default parameter group for memorydb_redis7"
+  LogsLogStream00kubeapiservereab5f25d9562000d7e32b208b01737c900jIkS0:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  CloudFrontOriginRequestPolicy0059781a5b390341f3afcbaf62929ccde100Ef9Xv:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::OriginRequestPolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      OriginRequestPolicyConfig:
+        QueryStringsConfig:
+          QueryStringBehavior: "none"
+        Comment: "Policy for custom origin with CORS"
+        HeadersConfig:
+          HeaderBehavior: "whitelist"
+          Headers:
+          - "origin"
+        CookiesConfig:
+          CookieBehavior: "none"
+        Name: "Managed-CORS-CustomOrigin"
+  EC2NetworkInterface00eni05031f661a9209c2200i5GnR:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterface"
+    DeletionPolicy: "Retain"
+    Properties:
+      Description: "Amazon EKS pjp-wiz-k8s-cluster"
+      PrivateIpAddress: "172.31.26.203"
+      PrivateIpAddresses:
+      - PrivateIpAddress: "172.31.26.203"
+        Primary: true
+      SecondaryPrivateIpAddressCount: 0
+      Ipv6PrefixCount: 0
+      Ipv4Prefixes: []
+      Ipv4PrefixCount: 0
+      GroupSet:
+      - "sg-0480aa42a1ab3a4ae"
+      Ipv6Prefixes: []
+      SubnetId:
+        Ref: "EC2Subnet00subnet02c025bb6b0f36cda001X8BW"
+      SourceDestCheck: true
+      InterfaceType: "interface"
+      Tags: []
+  ElastiCacheUser00default00WrWrz:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ElastiCache::User"
+    DeletionPolicy: "Retain"
+    Properties:
+      UserName: "default"
+      UserId: "default"
+      Engine: "redis"
+      Tags: []
+  LogsLogStream00kubecontrollermanagereab5f25d9562000d7e32b208b01737c900vds0e:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-controller-manager-eab5f25d9562000d7e32b208b01737c9"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      FieldIndexPolicies: []
+      LogGroupClass: "STANDARD"
+      LogGroupName: "/aws/eks/pjp-wiz-k8s-cluster/cluster"
+      DataProtectionPolicy: {}
+  EC2SecurityGroup00sg00cc7b6aa221cac1200hWy7l:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-5 created 2025-02-06T20:50:05.739Z"
+      GroupName: "launch-wizard-5"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  EC2SecurityGroup00sg0aaf07d48f6ca22ff00tuyZP:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "EuroLinux 8.4 Free-8.4.1-AutogenByAWSMP--1 created 2025-02-06T20:30:08.481Z"
+      GroupName: "EuroLinux 8.4 Free-8.4.1-AutogenByAWSMP--1"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  LogsLogStream00kubescheduler9829ee114b2dd6dfda3082c54606a42300Zu3vz:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-scheduler-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  EC2SubnetNetworkAclAssociation00aclassoc096e63ee60b82a32600NVxEL:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SubnetNetworkAclAssociation"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkAclId:
+        Ref: "EC2NetworkAcl00acl09a2711e1e4ff46dd00zsTn1"
+      SubnetId:
+        Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+  CloudFrontCachePolicy004d1d2f1d3a7149ad9e087ea5d843a55600YTfGN:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Default Amplify cache policy"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "Accept"
+            - "CloudFront-Viewer-Country"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "all"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-Default"
+  LogsLogGroup00awscodebuildSimpleDockerProject06614a4bf36b00wFS1H:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      FieldIndexPolicies: []
+      LogGroupClass: "STANDARD"
+      LogGroupName: "/aws/codebuild/SimpleDockerProject-06614a4bf36b"
+      DataProtectionPolicy: {}
+  LogsLogStream00kubeapiserver9b9b503c29cd0863121ceb618e78d35400zBSwE:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  IAMRole00AmazonEKSAutoNodeRole00jhkzy:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly"
+      - "arn:aws:iam::aws:policy/AmazonEKSWorkerNodeMinimalPolicy"
+      MaxSessionDuration: 3600
+      RoleName: "AmazonEKSAutoNodeRole"
+      Description: "Allows EKS nodes to connect to EKS Auto Mode clusters and to pull\
+        \ container images from ECR."
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "ec2.amazonaws.com"
+  EC2SecurityGroup00sg0df54862d7e96188d002TVqo:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "default VPC security group"
+      GroupName: "default"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - IpProtocol: "-1"
+        FromPort: -1
+        SourceSecurityGroupId:
+          Fn::GetAtt:
+          - "EC2VPC00vpc026b5a41adcabd1de005aRba"
+          - "DefaultSecurityGroup"
+        ToPort: -1
+        SourceSecurityGroupOwnerId: "977098990633"
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  LogsLogStream00kubescheduler9b9b503c29cd0863121ceb618e78d35400cCN6J:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-scheduler-9b9b503c29cd0863121ceb618e78d354"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekshilariousgrungegophercluster00z0We3"
+  LogsLogStream00authenticator9829ee114b2dd6dfda3082c54606a42300QcE0Y:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "authenticator-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  EC2SecurityGroup00sg05e721c034051f842007B7Vh:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-8 created 2025-02-13T11:22:03.443Z"
+      GroupName: "launch-wizard-8"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  LogsLogStream00kubeapiserver9829ee114b2dd6dfda3082c54606a42300LNfVl:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-9829ee114b2dd6dfda3082c54606a423"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  LogsLogStream00kubeapiserverb509754f03f0962f31092dae942500b600201B7:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "kube-apiserver-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  CloudFrontCachePolicy0083da9c7e98b44e11a16804f0df8e2c6500lzKfA:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy for origins that return Cache-Control headers. Query strings\
+          \ are not included in the cache key."
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "none"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "x-method-override"
+            - "origin"
+            - "host"
+            - "x-http-method"
+            - "x-http-method-override"
+          CookiesConfig:
+            CookieBehavior: "all"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "UseOriginCacheControlHeaders"
+  EC2Subnet00subnet02c025bb6b0f36cda001X8BW:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Subnet"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      MapPublicIpOnLaunch: true
+      EnableDns64: false
+      AvailabilityZoneId: "euw1-az2"
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsARecord: false
+        HostnameType: "ip-name"
+        EnableResourceNameDnsAAAARecord: false
+      CidrBlock: "172.31.16.0/20"
+      Ipv6Native: false
+      Tags: []
+  MemoryDBACL00openaccess00li2mK:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::ACL"
+    DeletionPolicy: "Retain"
+    Properties:
+      ACLName: "open-access"
+      Tags: []
+      UserNames:
+      - "default"
+  CodeStarConnectionsConnection00connection68aa5aff48e344fabc2cff72f4270f7700F4gVC:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CodeStarConnections::Connection"
+    DeletionPolicy: "Retain"
+    Properties:
+      ConnectionName: "WizDemo"
+      Tags: []
+      ProviderType: "GitHub"
+  IAMRole00AmazonEKSAutoClusterRole004ihlH:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+      - "arn:aws:iam::aws:policy/AmazonEKSNetworkingPolicy"
+      - "arn:aws:iam::aws:policy/AmazonEKSBlockStoragePolicy"
+      - "arn:aws:iam::aws:policy/AmazonEKSLoadBalancingPolicy"
+      - "arn:aws:iam::aws:policy/AmazonEKSComputePolicy"
+      MaxSessionDuration: 3600
+      RoleName: "AmazonEKSAutoClusterRole"
+      Description: "Allows access to other AWS service resources that are required\
+        \ to operate Auto Mode clusters managed by EKS."
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action:
+          - "sts:AssumeRole"
+          - "sts:TagSession"
+          Effect: "Allow"
+          Principal:
+            Service: "eks.amazonaws.com"
+  MemoryDBUser00default00EFscx:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::MemoryDB::User"
+    DeletionPolicy: "Retain"
+    Properties:
+      Tags: []
+      UserName: "default"
+  LogsLogStream00authenticatorb509754f03f0962f31092dae942500b600dGl0v:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Logs::LogStream"
+    DeletionPolicy: "Retain"
+    Properties:
+      LogStreamName: "authenticator-b509754f03f0962f31092dae942500b6"
+      LogGroupName:
+        Ref: "LogsLogGroup00awsekspjpwizk8sclustercluster00NVleB"
+  IAMRole00AWSServiceRoleForTrustedAdvisor00nDOmj:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/aws-service-role/trustedadvisor.amazonaws.com/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/aws-service-role/AWSTrustedAdvisorServiceRolePolicy"
+      MaxSessionDuration: 3600
+      RoleName: "AWSServiceRoleForTrustedAdvisor"
+      Description: "Access for the AWS Trusted Advisor Service to help reduce cost,\
+        \ increase performance, and improve security of your AWS environment."
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "trustedadvisor.amazonaws.com"
+  EKSCluster00pjpwizk8scluster00nRXOh:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EKS::Cluster"
+    DeletionPolicy: "Retain"
+    Properties:
+      Logging:
+        ClusterLogging:
+          EnabledTypes:
+          - Type: "api"
+          - Type: "audit"
+          - Type: "authenticator"
+          - Type: "controllerManager"
+          - Type: "scheduler"
+      ComputeConfig:
+        NodePools:
+        - "general-purpose"
+        - "system"
+        Enabled: true
+        NodeRoleArn: "arn:aws:iam::977098990633:role/OpenSeason"
+      UpgradePolicy:
+        SupportType: "STANDARD"
+      StorageConfig:
+        BlockStorage:
+          Enabled: true
+      Version: "1.31"
+      ZonalShiftConfig:
+        Enabled: true
+      AccessConfig:
+        AuthenticationMode: "API"
+      EncryptionConfig: []
+      KubernetesNetworkConfig:
+        ServiceIpv4Cidr: "10.100.0.0/16"
+        ElasticLoadBalancing:
+          Enabled: true
+        IpFamily: "ipv4"
+      RoleArn:
+        Fn::GetAtt:
+        - "IAMRole00AmazonEKSAutoClusterRole004ihlH"
+        - "Arn"
+      ResourcesVpcConfig:
+        EndpointPublicAccess: true
+        PublicAccessCidrs:
+        - "0.0.0.0/0"
+        SecurityGroupIds: []
+        SubnetIds:
+        - Ref: "EC2Subnet00subnet0663a57b02dacaf9b00jjAcr"
+        - Ref: "EC2Subnet00subnet05a03bea0c9b3836100NHQjm"
+        - Ref: "EC2Subnet00subnet02c025bb6b0f36cda001X8BW"
+        EndpointPrivateAccess: true
+      Name: "pjp-wiz-k8s-cluster"
+  CloudFrontCachePolicy001b1c9610973a4fb99932a6c27484088700x52nJ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Default Amplify cache policy"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStringBehavior: "all"
+          EnableAcceptEncodingBrotli: true
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "Authorization"
+            - "RSC"
+            - "Accept"
+            - "CloudFront-Viewer-Country"
+            - "X-Amplify-Dpl"
+            - "Host"
+          CookiesConfig:
+            CookieBehavior: "all"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 0
+        Name: "Managed-Amplify-Default-V2"
+  EC2Subnet00subnet0663a57b02dacaf9b00jjAcr:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::Subnet"
+    DeletionPolicy: "Retain"
+    Properties:
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      MapPublicIpOnLaunch: true
+      EnableDns64: false
+      AvailabilityZoneId: "euw1-az1"
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsARecord: false
+        HostnameType: "ip-name"
+        EnableResourceNameDnsAAAARecord: false
+      CidrBlock: "172.31.0.0/20"
+      Ipv6Native: false
+      Tags: []
+  EC2NetworkInterfaceAttachment00eniattach008c8d9c8c243464200491A1:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::NetworkInterfaceAttachment"
+    DeletionPolicy: "Retain"
+    Properties:
+      NetworkInterfaceId: "eni-0bd8118817de2e8a4"
+      DeviceIndex: "1"
+      DeleteOnTermination: true
+  CloudFrontCachePolicy000862726205a94f769dedb50ca2e3a84f00IUIgO:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::CloudFront::CachePolicy"
+    DeletionPolicy: "Retain"
+    Properties:
+      CachePolicyConfig:
+        Comment: "Policy for Elemental MediaPackage Origin"
+        MinTTL: 0
+        MaxTTL: 3.1536E7
+        ParametersInCacheKeyAndForwardedToOrigin:
+          QueryStringsConfig:
+            QueryStrings:
+            - "aws.manifestfilter"
+            - "start"
+            - "end"
+            - "m"
+            QueryStringBehavior: "whitelist"
+          EnableAcceptEncodingBrotli: false
+          HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+            - "origin"
+          CookiesConfig:
+            CookieBehavior: "none"
+          EnableAcceptEncodingGzip: true
+        DefaultTTL: 86400
+        Name: "Managed-Elemental-MediaPackage"
+  EC2SecurityGroup00sg0cacb0f9a19d2193400VclTb:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::EC2::SecurityGroup"
+    DeletionPolicy: "Retain"
+    Properties:
+      GroupDescription: "launch-wizard-7 created 2025-02-11T12:03:30.681Z"
+      GroupName: "launch-wizard-7"
+      VpcId:
+        Ref: "EC2VPC00vpc026b5a41adcabd1de005aRba"
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "tcp"
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+      - CidrIp: "0.0.0.0/0"
+        IpProtocol: "-1"
+        FromPort: -1
+        ToPort: -1
+  KMSKey00b0a2033b2f7e4d9c9007f279a7261cbb00PIShk:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::KMS::Key"
+    DeletionPolicy: "Retain"
+    Properties:
+      Origin: "AWS_KMS"
+      MultiRegion: false
+      Description: "Default key that protects my EBS volumes when no other key is\
+        \ defined"
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+        - Condition:
+            StringEquals:
+              kms:CallerAccount: "977098990633"
+              kms:ViaService: "ec2.eu-west-1.amazonaws.com"
+          Resource: "*"
+          Action:
+          - "kms:Encrypt"
+          - "kms:Decrypt"
+          - "kms:ReEncrypt*"
+          - "kms:GenerateDataKey*"
+          - "kms:CreateGrant"
+          - "kms:DescribeKey"
+          Effect: "Allow"
+          Principal:
+            AWS: "*"
+          Sid: "Allow access through EBS for all principals in the account that are\
+            \ authorized to use EBS"
+        - Resource: "*"
+          Action:
+          - "kms:Describe*"
+          - "kms:Get*"
+          - "kms:List*"
+          - "kms:RevokeGrant"
+          Effect: "Allow"
+          Principal:
+            AWS: "arn:aws:iam::977098990633:root"
+          Sid: "Allow direct access to key metadata to the account"
+        Id: "auto-ebs-2"
+      KeySpec: "SYMMETRIC_DEFAULT"
+      Enabled: true
+      EnableKeyRotation: true
+      KeyUsage: "ENCRYPT_DECRYPT"
+      Tags: []
