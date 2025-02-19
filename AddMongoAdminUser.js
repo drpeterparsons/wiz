@@ -2,5 +2,7 @@ use admin;
 db.createUser({
   user: "admin",
   pwd: "Admin123!",
-  roles: [{ role: "root", db: "admin" }]
+  roles: [
+    { role: "root", db: "admin" }
+  ]
 });
